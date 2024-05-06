@@ -31,7 +31,7 @@ To run the project:
 To verify the communication between Unity and Python:
 
 1. Check the Unity console for errors. Lack of connection will be indicated by error messages.
-2. Send a message to the chatbot in Unity. The Python script's console should display a message in the format `<emotion>`, indicating the most up-to-date emotion detected.
+2. Send a message to the chatbot in Unity. The Unity console should display a message in the format `<emotion>`, indicating the most up-to-date emotion detected.
 
 ## Troubleshooting
 
