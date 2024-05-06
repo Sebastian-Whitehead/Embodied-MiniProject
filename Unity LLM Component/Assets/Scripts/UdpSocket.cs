@@ -22,6 +22,9 @@ using System.Threading;
 
 public class UdpSocket : MonoBehaviour
 {
+    [NonSerialized]
+    public string lastRecieved = "";
+
     [Header("Transmission Status")]
     [HideInInspector] 
     public bool isTxStarted = false;
@@ -99,7 +102,7 @@ public class UdpSocket : MonoBehaviour
                 IPEndPoint anyIP = new IPEndPoint(IPAddress.Any, 0);
                 byte[] data = client.Receive(ref anyIP);
                 string text = Encoding.UTF8.GetString(data);
-                print(">> " + text);
+                //print(">> " + text);
                 ProcessInput(text);
             }
             catch (Exception err)
@@ -112,6 +115,7 @@ public class UdpSocket : MonoBehaviour
     private void ProcessInput(string input)
     {
         // PROCESS INPUT RECEIVED STRING HERE
+        lastRecieved = input;
 
         if (!isTxStarted) // First data arrived so tx started
         {

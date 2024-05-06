@@ -26,6 +26,8 @@ namespace LLMUnitySamples
         private bool warmUpDone = false;
         private int lastBubbleOutsideFOV = -1;
 
+        private UdpSocket udpSocket;
+
         void Start()
         {
             if (font == null) font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
@@ -52,6 +54,8 @@ namespace LLMUnitySamples
             inputBubble.AddValueChangedListener(onValueChanged);
             inputBubble.setInteractable(false);
             _ = llm.Warmup(WarmUpCallback);
+
+            udpSocket = this.GetComponent<UdpSocket>();
         }
 
         void onInputFieldSubmit(string newText)
@@ -73,8 +77,18 @@ namespace LLMUnitySamples
             playerBubble.OnResize(UpdateBubblePositions);
             aiBubble.OnResize(UpdateBubblePositions);
 
+            message = messageFormatter(message); // Appended code to include the emotional state of 
+
             Task chatTask = llm.Chat(message, aiBubble.SetText, AllowInput);
             inputBubble.SetText("");
+        }
+
+        public string messageFormatter(string message)
+        {
+            
+            message += "<" + udpSocket.lastRecieved + ">";
+            Debug.Log("<" + udpSocket.lastRecieved + ">");
+            return message;
         }
 
         public void WarmUpCallback()

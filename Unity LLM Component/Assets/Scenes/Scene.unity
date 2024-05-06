@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657832, g: 0.49641222, b: 0.57481664, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 180020065}
   - component: {fileID: 180020066}
+  - component: {fileID: 180020067}
   m_Layer: 5
   m_Name: ChatBot
   m_TagString: Untagged
@@ -182,6 +183,22 @@ MonoBehaviour:
   textPadding: 10
   bubbleSpacing: 10
   sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+--- !u!114 &180020067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180020064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d86ab31b3033f647831d318ce3bfd1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isTxStarted: 0
+  IP: 127.0.0.1
+  rxPort: 8000
+  txPort: 8001
 --- !u!1 &507661347
 GameObject:
   m_ObjectHideFlags: 0
@@ -660,7 +677,7 @@ MonoBehaviour:
   expertOptions: 0
   host: localhost
   port: 13333
-  stream: 1
+  stream: 0
   grammar: 
   seed: 0
   numPredict: 256
@@ -684,28 +701,42 @@ MonoBehaviour:
   ignoreEos: 0
   nKeep: -1
   stop: []
-  grammarString: 
   playerName: user
   AIName: assistant
-  prompt: A chat between a curious human and an artificial intelligence assistant.
-    The assistant gives helpful, detailed, and polite answers to the human's questions.
-  chatTemplate: chatml
+  prompt: 'A chat between a curious human and an artificial intelligence assistant.
+    The assistant gives helpful, detailed, and polite answers to the human''s questions.
+
+
+    The
+    assistant has eyes and is able to determine the user emotional state the detected
+    emotion is given in the following format: ("<emotion>") and should use this information
+    to inform how it should tone its reponses. If the user is for example neutral
+    or sad the assistant should attempt to make them happy. Once happy the assitant
+    should attempt to maintane this emotional state in the user.  The assistant should
+    not include tonality descriptors references in their reponse, but instead modify
+    their reponse to refluct the intended emotion.
+
+
+    Do not include any reponse
+    emotional state in brackets!'
   setNKeepToPrompt: 1
-  modelHide: 1
+  chatTemplate: mistral chat
+  grammarString: 
   numThreads: -1
-  numGPULayers: 0
+  numGPULayers: 30
   parallelPrompts: -1
   debug: 0
   asynchronousStartup: 0
   remote: 0
   killExistingServersOnStart: 1
-  model: 
+  model: mistral-7b-instruct-v0.2.Q4_K_M.gguf
   lora: 
   contextSize: 512
   batchSize: 512
-  SelectedModel: 0
+  SelectedModel: 1
   modelProgress: 1
   modelCopyProgress: 1
+  modelHide: 1
 --- !u!1 &1051131186
 GameObject:
   m_ObjectHideFlags: 0
